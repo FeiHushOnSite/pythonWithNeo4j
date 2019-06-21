@@ -1,34 +1,34 @@
 from pymongo import MongoClient
 from py2neo import Node, Relationship, Graph
-#import pandas as pd
+
+# import pandas as pd
 
 client = MongoClient('mongodb://localhost:27017/')
-
-
-def create_node(list):
-    for node in list:
-        for parm in node.keys():
-            keys = node.keys
-            if 'id' in keys:
-                id = parm['id']
-        # if 'name' in keys:
-        #     name = node.values()
-        # if 'age' in keys:
-        #     age = node.values()
-        # if 'gender' in keys:
-        #     gender = node.keys()
-        # node = Node(id=id, name=name, age=age, gender=gender)
-        # print(id)
-            print(id)
-            return
-
 
 db = client.test  # 指定数据库
 collection_student = db.students  # 指定集合
 collection_teacher = db.teachers
-
-result = collection_teacher.find_one()
+global info_id, info_name, info_age, info_gender, node
+result = collection_teacher.find()
 result_student = collection_student.find()
+
+def create_node(list):
+    for td in list:
+        for tk in td.keys():
+            if 'id' in tk:
+                info_id = tk
+            if 'name' in tk:
+                info_name = tk
+            if 'age' in tk:
+                info_age = tk
+            if 'gender' in tk:
+                info_gender = tk
+    node = Node(id=info_id, name=info_name, age=info_age, gender=info_gender)
+    print(node)
+
+create_node(result)
+
+
 
 # node_teacher = Node(result)
 # node_student = Node(result_student)
@@ -37,25 +37,8 @@ result_student = collection_student.find()
 
 # print(relation)
 
-#teacher = Node(id='20170101', name='Jordan', age=20, gender='male')
+# teacher = Node(id='20170101', name='Jordan', age=20, gender='male')
 
-test_data = {'id': '20170101',
-             'name': 'Jordan',
-             'age': 20,
-             'gender': 'male'}, {'id': '20170101',
-                                 'name': 'Jordan',
-                                 'age': 20,
-                                 'gender': 'male'}, {'id': '20170101',
-                                                     'name': 'Jordan',
-                                                     'age': 20,
-                                                     'gender': 'male'}
-print(create_node(test_data))
-# insert_data = collection_teacher.insert(test_data)
-# print(insert_data)
-
-# print(teacher)
-# print(result)
-# print(result_student)
 
 result_teacher = collection_teacher.find()
 print(result_student)

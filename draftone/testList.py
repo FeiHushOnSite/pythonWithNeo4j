@@ -30,6 +30,6 @@ for td in test_data:
         if 'gender' in tk:
             info_gender = tk
     node = Node(id=info_id, name=info_name, age=info_age, gender=info_gender)
-print('result:' + info_id, ':' , info_name, ':',info_age, ':',info_gender)
+print('result:' + info_id, ':', info_name, ':', info_age, ':', info_gender)
 print(node)
 graph.create(node)
