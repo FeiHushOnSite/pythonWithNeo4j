@@ -46,20 +46,14 @@ nodewordYwx = Node(entry, name=wordname[2])
 nodewordYr = Node(entry, name=wordname[3])
 nodewordQb = Node(entry, name=wordname[4])
 
-nodeword_list =nodewordTb, nodewordYd, nodewordYwx, nodewordYr, nodewordQb
-create_graph(nodeword_list)
-
 nodewordBdFp = Node(entry, name=wordname_nodeQt[0])
 nodewordRegister = Node(entry, name=wordname_nodeQt[1])
 nodewordRecord = Node(entry, name=wordname_nodeQt[2])
 nodewordResource = Node(entry, name=wordname_nodeQt[3])
 nodewordCall = Node(entry, name=wordname_nodeQt[4])
 
-graph.create(nodewordBdFp)
-graph.create(nodewordRegister)
-graph.create(nodewordRecord)
-graph.create(nodewordResource)
-graph.create(nodewordCall)
+nodeword_list = nodewordTb, nodewordYd, nodewordYwx, nodewordYr, nodewordQb, nodewordBdFp, nodewordRegister, nodewordRecord, nodewordResource, nodewordCall
+create_graph(nodeword_list)
 
 nodewordTb_relation_typepath = Relationship(nodewordTb, relation, nodeTb)
 nodewordYd_relation_typepath = Relationship(nodewordYd, relation, nodeTb)
@@ -72,16 +66,8 @@ nodewordRecord_relation_typepath = Relationship(nodewordRecord, relation, nodeQt
 nodewordResource_relation_typepath = Relationship(nodewordResource, relation, nodeQt)
 nodewordCall_relation_typepath = Relationship(nodewordCall, relation, nodeQt)
 
-graph.create(nodewordTb_relation_typepath)
-graph.create(nodewordYd_relation_typepath)
-graph.create(nodewordYwx_relation_typepath)
-graph.create(nodewordYr_relation_typepath)
-
-graph.create(nodewordBdFp_relation_typepath)
-graph.create(nodewordRegister_relation_typepath)
-graph.create(nodewordRecord_relation_typepath)
-graph.create(nodewordResource_relation_typepath)
-graph.create(nodewordCall_relation_typepath)
+nodeword_relation_list = nodewordTb_relation_typepath, nodewordYd_relation_typepath, nodewordYwx_relation_typepath, nodewordYr_relation_typepath, nodewordBdFp_relation_typepath, nodewordRegister_relation_typepath, nodewordRecord_relation_typepath, nodewordResource_relation_typepath, nodewordCall_relation_typepath
+create_graph(nodeword_relation_list)
 
 # --------------------------------------------------------------------------------------
 """
@@ -243,7 +229,6 @@ question_different_relative = Node('相似问法', name='三个计划的差别�
 question_different_relative_question = Relationship(question_different_relative, relation, question_different)
 question_call_relative_nodewordQb = Relationship(question_different, relation, nodewordQb)
 
-graph.create(question_different)
-graph.create(question_different_relative)
-graph.create(question_different_relative_question)
-graph.create(question_call_relative_nodewordQb)
+question_different_list = question_different, question_different_relative, question_different_relative_question, question_call_relative_nodewordQb
+create_graph(question_different_list)
+
