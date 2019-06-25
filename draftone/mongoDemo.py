@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+import pandas as pd
 client = MongoClient('mongodb://localhost:27017/')
 db = client.test #指定数据库
 collection = db.students  #指定集合
