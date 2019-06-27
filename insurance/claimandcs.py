@@ -58,3 +58,39 @@ CLASS_3 = "食品商", "一般內勤人員", "製圖員", "內勤人員", "蛙�
 for c in CLASS_3:
     node = Node(index, name=c)
     graph.create(node)
+
+"""
+LOAD CSV FROM "file:///ins.csv" AS line create (i:ins{k_id:line[0],keyword:line[1],index:line[2]})
+
+LOAD CSV FROM "file:///CS002.csv" AS line 
+create (c:cs{POLICY_CODE:line[0],REAL_NAME:line[1],SERVICE_NAME:line[2],GENDER:line[3],CERTI_CODE:line[4],
+MARRIAGE_ID:line[5],TEL_1:line[6],RELA_ADDRESS:line[7],CLASS_1:line[8],
+CLASS_2:line[9],CLASS_3:line[10],RETIRED:line[11],SMOKING:line[12]})
+
+
+LOAD CSV FROM "file:///Claim02.csv" AS line 
+create (c1:claim{CASE_ID:line[0],POLICY_CODE:line[1],Claim_TYPE_NAME:line[2],Insured_REAL_NAME:line[3],
+CONCLUSION_DESC:line[4],PAY_SUM:line[5],GENDER:line[6],CERTI_CODE:line[7],MARRIAGE_ID:line[8],
+RELA_ADDRESS:line[9],CLASS_1:line[10],CLASS_2:line[11],CLASS_3:line[12],RETIRED:line[13]})
+
+MATCH (c:Claim_TYPE_NAME{name:"壽險死亡"}), (i:Insured_REAL_NAME{name:"小冷"}) MERGE (i)-[r:belong]->(c) return r
+match (i:Insured_REAL_NAME{name:'白敬亭'}),(s:SERVICE_NAME{name:'保单假期'}) merge (s)-[r:belong]->(i) return r
+match (n:Insured_REAL_NAME{name:'小冷'}) 
+set n.name='小冷' 
+set n.PAY_SUM='20000' 
+set n.SMOKING='N' 
+set n.GENDER = 'M' 
+set n.保额 ='50000' 
+set n.保费='500'
+
+match (n:Insured_REAL_NAME{name:'吴汉'}) 
+set n.name='吴汉' set n.PAY_SUM='99999' set n.SMOKING='N' 
+set n.GENDER = 'M' set n.保额 ='300000' set n.保费='3000' 
+set n.POLICY_CODE='000506185820318' set n.CASE_ID='486722' set n.marrage='N'
+
+match(n:Insured_REAL_NAME{name:'被保人A'})
+-[r:CONCLUSION{Claim_TYPE_NAME{name:'壽險殘廢'}}]->(s:CONCLUSION_DESC{name:'豁免保費'}) return n,r,s
+
+match(n:Insured_REAL_NAME{name:'被保人A'})-[r:CONCLUSION]->(s:CONCLUSION_DESC{name:'豁免保費'}) set r.CONCLUSION = '壽險殘廢结论是豁免保費'
+
+"""
